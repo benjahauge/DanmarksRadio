@@ -17,9 +17,33 @@ namespace DanmarksRadio.Managers
 			new MusicRecord() {Artist = "Justin Bieber", Duration = 150, PublicationYear = 2009, Title = "Baby"}
 		};
 
-		public List<MusicRecord> GetAll()
+		public List<MusicRecord> GetAll(string title = null, string artist = null, string sortBy = null)
 		{
-			return new List<MusicRecord>(data);
+			List<MusicRecord> records = new List<MusicRecord>(data);
+
+			if (title != null)
+			{
+				records = records.FindAll(record => record.Title != null && record.Title.StartsWith(title));
+			}
+			if (artist != null)
+			{
+				records = records.FindAll(record => record.Artist != null && record.Artist.StartsWith(artist));
+			}
+			if (sortBy != null)
+			{
+				switch (sortBy.ToLower())
+				{
+					case "title":
+						records = records.OrderBy(record => record.Title).ToList();
+						break;
+					case "artist":
+						records = records.OrderBy(record => record.Artist).ToList();
+						break;
+				}
+			}
+
+			return records;
+			//return new List<MusicRecord>(data);
 		}
 	}
 }

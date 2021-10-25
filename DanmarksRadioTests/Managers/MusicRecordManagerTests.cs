@@ -19,5 +19,14 @@ namespace DanmarksRadio.Managers.Tests
 
 			Assert.AreEqual(expectedResult, manager.GetAll().Count);
 		}
+
+		[TestMethod()]
+		public void GetAllWithParametersTest()
+		{
+			int expectedResult = 1;
+
+			Assert.AreEqual(expectedResult, manager.GetAll("Baby", null, null).Count);
+		}
+
 	}
 }

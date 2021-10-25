@@ -18,9 +18,9 @@ namespace DanmarksRadio.Controllers
 
 		// GET: api/<MusicRecordController>
 		[HttpGet]
-		public IEnumerable<MusicRecord> Get()
+		public IEnumerable<MusicRecord> Get([FromQuery] string title, [FromQuery] string artist, [FromQuery] string sort_by)
 		{
-			return _manager.GetAll();
+			return _manager.GetAll(title, artist, sort_by);
 		}
 
 		// GET api/<MusicRecordController>/5
