@@ -32,8 +32,9 @@ namespace DanmarksRadio.Controllers
 
 		// POST api/<MusicRecordController>
 		[HttpPost]
-		public void Post([FromBody] string value)
+		public MusicRecord Post([FromBody] MusicRecord value)
 		{
+			return _manager.Add(value);
 		}
 
 		// PUT api/<MusicRecordController>/5

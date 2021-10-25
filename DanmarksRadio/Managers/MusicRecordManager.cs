@@ -45,5 +45,11 @@ namespace DanmarksRadio.Managers
 			return records;
 			//return new List<MusicRecord>(data);
 		}
+
+		public MusicRecord Add(MusicRecord newRecord)
+		{
+			data.Add(newRecord);
+			return newRecord;
+		}
 	}
 }
