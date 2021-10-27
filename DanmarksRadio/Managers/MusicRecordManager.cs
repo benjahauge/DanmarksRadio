@@ -51,5 +51,10 @@ namespace DanmarksRadio.Managers
 			data.Add(newRecord);
 			return newRecord;
 		}
+
+		public void Delete(MusicRecord newRecord)
+		{
+			data.Remove(newRecord);
+		}
 	}
 }
