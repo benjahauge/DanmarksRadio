@@ -13,6 +13,8 @@ namespace DanmarksRadio.Managers.Tests
 	public class MusicRecordManagerTests
 	{
 		MusicRecordManager manager = new MusicRecordManager();
+		MusicRecord newRecord = new MusicRecord() { Title = "The Bones", Artist = "Maren Morris", Duration = 200, PublicationYear = 2019 };
+
 		[TestMethod()]
 		public void GetAllTest()
 		{
@@ -32,8 +34,7 @@ namespace DanmarksRadio.Managers.Tests
 		[TestMethod()]
 		public void AddTest()
         {
-			MusicRecord musicrecord = new MusicRecord() { Title = "The Bones", Artist = "Maren Morris", Duration = 200, PublicationYear = 2019 };
-			manager.Add(musicrecord);
+			manager.Add(newRecord);
 			int expectedResult = 4;
 
 			Assert.AreEqual(expectedResult, manager.GetAll(null).Count);
@@ -41,15 +42,24 @@ namespace DanmarksRadio.Managers.Tests
 			
         }
 
-		//[TestMethod()]
-		//public void DeleteTest()
-  //      {
-		//	MusicRecord musicrecord = new MusicRecord() { Title = "Baby" };
-		//	manager.Delete(musicrecord.Title);
-		//	int expectedResult = 2;
+		[TestMethod()]
+		public void DeleteTest()
+		{
+			manager.Delete(newRecord.Title);
+			int expectedResult = 2;
 
-		//	Assert.AreEqual(expectedResult, manager.GetAll(null).Count);
-  //      }
+			Assert.AreEqual(expectedResult, manager.GetAll(null).Count);
+		}
+
+		[TestMethod()]
+		public void UpdateTest()
+		{
+			MusicRecord Updaterecord = new MusicRecord();
+			manager.Update(newRecord.Title, Updaterecord);
+			Updaterecord.Title = "Paparazzi";
+			
+		}
+
 
 	}
 }

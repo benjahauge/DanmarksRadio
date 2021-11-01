@@ -38,9 +38,10 @@ namespace DanmarksRadio.Controllers
 		}
 
 		// PUT api/<MusicRecordController>/5
-		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		[HttpPut("{title}")]
+		public MusicRecord Put(string title, [FromBody] MusicRecord value)
 		{
+			return _manager.Update(title, value);
 		}
 
 		// DELETE api/<MusicRecordController>/5

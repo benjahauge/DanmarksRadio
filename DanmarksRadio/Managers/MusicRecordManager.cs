@@ -59,5 +59,16 @@ namespace DanmarksRadio.Managers
 			data.Remove(record);
 			return record;
 		}
+
+		public MusicRecord Update(string title, MusicRecord updates)
+		{
+			MusicRecord record = data.Find(record => record.Title == title);
+			if (record == null) return null;
+			record.Title = updates.Title;
+			record.Artist = updates.Artist;
+			record.Duration = updates.Duration;
+			record.PublicationYear = updates.PublicationYear;
+			return record;
+		}
 	}
 }
