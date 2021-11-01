@@ -45,9 +45,9 @@ namespace DanmarksRadio.Controllers
 
 		// DELETE api/<MusicRecordController>/5
 		[HttpDelete("{title}")]
-		public void Delete(MusicRecord title)
+		public MusicRecord Delete(string title)
 		{
-			_manager.Delete(title);
+			return _manager.Delete(title);
 		}
 	}
 }

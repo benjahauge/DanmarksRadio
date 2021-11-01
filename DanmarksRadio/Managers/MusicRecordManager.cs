@@ -52,9 +52,12 @@ namespace DanmarksRadio.Managers
 			return newRecord;
 		}
 
-		public void Delete(MusicRecord newRecord)
+		public MusicRecord Delete(string title)
 		{
-			data.Remove(newRecord);
+			MusicRecord record = data.Find(record1 => record1.Title == title);
+			if (record == null) return null;
+			data.Remove(record);
+			return record;
 		}
 	}
 }
