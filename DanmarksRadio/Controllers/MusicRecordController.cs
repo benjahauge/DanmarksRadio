@@ -23,7 +23,12 @@ namespace DanmarksRadio.Controllers
 		[ProducesResponseType(204)]
 		public ActionResult<IEnumerable<MusicRecord>> Get([FromQuery] string title, [FromQuery] string artist, [FromQuery] string sort_by)
 		{
-			return Ok(_manager.GetAll(title, artist, sort_by));
+			var musicRecords = _manager.GetAll(title, artist, sort_by);
+			if (musicRecords.Count == 0)
+			{
+				return NoContent();
+			}
+			return Ok(musicRecords);
 		}
 
 		// GET api/<MusicRecordController>/5
@@ -35,23 +40,39 @@ namespace DanmarksRadio.Controllers
 
 		// POST api/<MusicRecordController>
 		[HttpPost]
-		public MusicRecord Post([FromBody] MusicRecord value)
+		[ProducesResponseType(200)]
+		public ActionResult<MusicRecord> Post([FromBody] MusicRecord value)
 		{
-			return _manager.Add(value);
+			return Ok(_manager.Add(value));
 		}
 
 		// PUT api/<MusicRecordController>/5
 		[HttpPut("{title}")]
-		public MusicRecord Put(string title, [FromBody] MusicRecord value)
+		[ProducesResponseType(200)]
+		[ProducesResponseType(404)]
+		public ActionResult<MusicRecord> Put(string title, [FromBody] MusicRecord value)
 		{
-			return _manager.Update(title, value);
+			var musicRecord = _manager.Update(title, value);
+			if (musicRecord == null)
+			{
+				return NotFound();
+			}
+			return Ok(musicRecord);
 		}
 
 		// DELETE api/<MusicRecordController>/5
 		[HttpDelete("{title}")]
-		public MusicRecord Delete(string title)
+		[ProducesResponseType(200)]
+		[ProducesResponseType(404)]
+		public ActionResult<MusicRecord> Delete(string title)
 		{
-			return _manager.Delete(title);
+			var musicRecord = _manager.Delete(title);
+			if (musicRecord != null)
+			{
+				return Ok(musicRecord);
+			}
+			return NotFound();
+
 		}
 	}
 }
