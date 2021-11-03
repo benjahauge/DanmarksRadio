@@ -17,10 +17,13 @@ namespace DanmarksRadio.Controllers
 		private readonly MusicRecordManager _manager = new MusicRecordManager();
 
 		// GET: api/<MusicRecordController>
+		
 		[HttpGet]
-		public IEnumerable<MusicRecord> Get([FromQuery] string title, [FromQuery] string artist, [FromQuery] string sort_by)
+		[ProducesResponseType(200)]
+		[ProducesResponseType(204)]
+		public ActionResult<IEnumerable<MusicRecord>> Get([FromQuery] string title, [FromQuery] string artist, [FromQuery] string sort_by)
 		{
-			return _manager.GetAll(title, artist, sort_by);
+			return Ok(_manager.GetAll(title, artist, sort_by));
 		}
 
 		// GET api/<MusicRecordController>/5
